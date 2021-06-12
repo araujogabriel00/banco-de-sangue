@@ -1,16 +1,20 @@
 package com.bancosangue.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -31,17 +35,56 @@ public class Pessoa implements Serializable {
 	private String pai;
 	private String mae;
 	private Date nascimento;
+	private Integer numero;
+	private String cep;
+	private String bairro;
+	private String endereco;
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 
 	@ElementCollection
 	@CollectionTable(name = "TELEFONE")
 	private Set<String> telefone = new HashSet<>();
 
+	@OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)
+	private List<Endereco> enderecos = new ArrayList<>();
+
 	public Pessoa() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Pessoa(Long id, String nome, String cpf, String rg, String email, Float peso, Double altura, String pai,
-			String mae, Date nascimento, Set<String> telefone) {
+			String mae, Date nascimento) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,7 +96,6 @@ public class Pessoa implements Serializable {
 		this.pai = pai;
 		this.mae = mae;
 		this.nascimento = nascimento;
-		this.telefone = telefone;
 	}
 
 	public Long getId() {
@@ -142,6 +184,14 @@ public class Pessoa implements Serializable {
 
 	public void setTelefone(Set<String> telefone) {
 		this.telefone = telefone;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 
 	@Override

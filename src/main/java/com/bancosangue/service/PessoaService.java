@@ -1,14 +1,14 @@
 package com.bancosangue.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bancosangue.dto.PessoaDTO;
+import com.bancosangue.entities.Endereco;
 import com.bancosangue.entities.Pessoa;
+import com.bancosangue.repositories.EnderecoRepository;
 import com.bancosangue.repositories.PessoaRepository;
 
 @Service
@@ -17,20 +17,23 @@ public class PessoaService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+
 	@Transactional
-	public PessoaDTO insert(PessoaDTO dto) {
-		Pessoa pessoa = new Pessoa(dto.getId(), dto.getNome(), dto.getCpf(), dto.getRg(), dto.getEmail(), dto.getPeso(),
-				dto.getAltura(), dto.getPai(), dto.getMae(), dto.getNascimento(), dto.getTelefone());
-		pessoa = pessoaRepository.save(pessoa);
-		return new PessoaDTO(pessoa);
+	public Pessoa insert(Pessoa dto) {
+		dto = pessoaRepository.save(dto);
+		Endereco endereco = new Endereco(null, dto.getNumero(), dto.getCep(), dto.getBairro(), dto.getEndereco(), dto);
+		enderecoRepository.save(endereco);
+		return dto;
 
 	}
 
 	@Transactional(readOnly = true)
-	public List<PessoaDTO> findAll() {
-		List<Pessoa> list = pessoaRepository.findAll();
-		return list.stream().map(x -> new PessoaDTO(x)).collect(Collectors.toList());
+	public List<Pessoa> findAll() {
 
-	};
+		return pessoaRepository.findAll();
+
+	}
 
 }

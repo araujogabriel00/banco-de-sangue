@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bancosangue.dto.PessoaDTO;
+import com.bancosangue.entities.Pessoa;
 import com.bancosangue.service.PessoaService;
 
 @RestController
@@ -23,7 +23,7 @@ public class PessoaControler {
 
 	
 	@PostMapping
-	public ResponseEntity<PessoaDTO> insert(@RequestBody PessoaDTO dto) {
+	public ResponseEntity<Pessoa> insert(@RequestBody Pessoa dto) {
 		dto = pessoaService.insert(dto);
 		return ResponseEntity.ok(dto);
 	}
@@ -31,8 +31,8 @@ public class PessoaControler {
 	
 	
 	@GetMapping
-	public ResponseEntity<List<PessoaDTO>> findAll(){
-		List<PessoaDTO> list = pessoaService.findAll();
+	public ResponseEntity<List<Pessoa>> findAll(){
+		List<Pessoa> list = pessoaService.findAll();
 		return ResponseEntity.ok().body(list);
 		
 	}
