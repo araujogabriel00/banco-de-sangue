@@ -23,7 +23,7 @@ public class PessoaControler {
 
 	
 	@PostMapping
-	public ResponseEntity<Pessoa> insert(@RequestBody Pessoa dto) {
+	public ResponseEntity<List<Pessoa>> insert(@RequestBody List<Pessoa> dto) {
 		dto = pessoaService.insert(dto);
 		return ResponseEntity.ok(dto);
 	}

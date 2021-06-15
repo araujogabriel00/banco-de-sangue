@@ -6,12 +6,4 @@ import com.bancosangue.entities.Endereco;
 
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
 
-	
-
-	
-	
-	
-
-	
-
 }

@@ -2,7 +2,6 @@ package com.bancosangue.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,12 +33,14 @@ public class Pessoa implements Serializable {
 	private Double altura;
 	private String pai;
 	private String mae;
-	private Date nascimento;
+	private String data_nasc;
 	private Integer numero;
 	private String cep;
 	private String bairro;
 	private String endereco;
-
+	private String cidade;
+	private String estado;
+	
 	public Integer getNumero() {
 		return numero;
 	}
@@ -83,8 +84,11 @@ public class Pessoa implements Serializable {
 
 	}
 
+	
+	
 	public Pessoa(Long id, String nome, String cpf, String rg, String email, Float peso, Double altura, String pai,
-			String mae, Date nascimento) {
+			String mae, String data_nasc, Integer numero, String cep, String bairro, String endereco, String cidade,
+			String estado, Set<String> telefone, List<Endereco> enderecos) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -95,7 +99,23 @@ public class Pessoa implements Serializable {
 		this.altura = altura;
 		this.pai = pai;
 		this.mae = mae;
-		this.nascimento = nascimento;
+		this.data_nasc = data_nasc;
+		this.numero = numero;
+		this.cep = cep;
+		this.bairro = bairro;
+		this.endereco = endereco;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.telefone = telefone;
+		this.enderecos = enderecos;
+	}
+
+	public String getData_nasc() {
+		return data_nasc;
+	}
+
+	public void setData_nasc(String data_nasc) {
+		this.data_nasc = data_nasc;
 	}
 
 	public Long getId() {
@@ -170,14 +190,6 @@ public class Pessoa implements Serializable {
 		this.mae = mae;
 	}
 
-	public Date getNascimento() {
-		return nascimento;
-	}
-
-	public void setNascimento(Date nascimento) {
-		this.nascimento = nascimento;
-	}
-
 	public Set<String> getTelefone() {
 		return telefone;
 	}
@@ -229,6 +241,22 @@ public class Pessoa implements Serializable {
 		} else if (!rg.equals(other.rg))
 			return false;
 		return true;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 }

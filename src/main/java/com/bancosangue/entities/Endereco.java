@@ -31,18 +31,23 @@ public class Endereco implements Serializable {
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
-	public Endereco() {
+	@ManyToOne
+	@JoinColumn(name = "cidade_id")
+	private Cidade cidade;
 
-	}
-
-	public Endereco(Long id, Integer numero, String cep, String bairro, String endereco, Pessoa dto) {
+	public Endereco(Long id, Integer numero, String cep, String bairro, String endereco, Pessoa pessoa, Cidade cidade) {
 		super();
 		this.id = id;
 		this.numero = numero;
 		this.cep = cep;
 		this.bairro = bairro;
 		this.endereco = endereco;
-		this.pessoa = dto;
+		this.pessoa = pessoa;
+		this.cidade = cidade;
+	}
+
+	public Endereco() {
+
 	}
 
 	public Long getId() {
@@ -85,12 +90,20 @@ public class Endereco implements Serializable {
 		this.endereco = endereco;
 	}
 
-	public Pessoa getPessoa(Pessoa pessoa) {
+	public Pessoa getPessoa() {
 		return pessoa;
 	}
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	public Cidade getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}
 
 	@Override
